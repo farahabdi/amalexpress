@@ -31,7 +31,7 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Println("Hello World")
+	log.Println("PLEASE WORK !!!")
 	http.HandleFunc("/", sayHello)
 	if err := http.ListenAndServe(":5000", nil); err != nil {
 		panic(err)
