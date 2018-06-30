@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: go-server
-        image: gcr.io/pragmatic-mote-207921/amal-img:ff649d4
+        image: gcr.io/pragmatic-mote-207921/amal-img:46d49ab
         ports:
         - containerPort: 5000
