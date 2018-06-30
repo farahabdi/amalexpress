@@ -21,7 +21,9 @@ PKG := github.com/farahabdi/amalexpress
 # Where to push the docker image.
 REGISTRY ?= gcr.io
 
-IMG_NAME ?= amal-img
+PROJECT_ID ?= pragmatic-mote-207921 
+
+IMG_NAME ?= pragmatic-mote-207921/amal-img
 
 # Which architecture to build - see $(ALL_ARCH) for options.
 ARCH ?= amd64
@@ -119,13 +121,13 @@ shell: build-dirs
 DOTFILE_IMAGE = $(subst :,_,$(subst /,_,$(IMAGE))-$(VERSION))
 
 container: .container-$(DOTFILE_IMAGE) container-name
-.container-$(DOTFILE_IMAGE): bin/$(ARCH)/$(BIN) Dockerfile.in
+.container-$(DOTFILE_IMAGE): bin/$(ARCH)/$(BIN) Dockerfile
 	@sed \
 	    -e 's|ARG_BIN|$(BIN)|g' \
 	    -e 's|ARG_ARCH|$(ARCH)|g' \
 	    -e 's|ARG_FROM|$(BASEIMAGE)|g' \
-	    Dockerfile.in > .dockerfile-$(ARCH)
-	@docker build -t $(IMAGE):$(VERSION) -f .dockerfile-$(ARCH) .
+	    Dockerfile.in > Dockerfile
+	@docker build -t $(IMAGE):$(VERSION) -f Dockerfile .
 	@docker images -q $(IMAGE):$(VERSION) > $@
 
 container-name:
